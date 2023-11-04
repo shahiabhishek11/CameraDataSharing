@@ -1,0 +1,5 @@
+/home/sdv-2534/AZUR/sdv_app_sensorsharing/sensorsharing/build/CMakeFiles/rebuild_cache.dir
+/home/sdv-2534/AZUR/sdv_app_sensorsharing/sensorsharing/build/CMakeFiles/edit_cache.dir
+/home/sdv-2534/AZUR/sdv_app_sensorsharing/sensorsharing/build/CMakeFiles/Server.dir
+/home/sdv-2534/AZUR/sdv_app_sensorsharing/sensorsharing/build/CMakeFiles/Client.dir
+/home/sdv-2534/AZUR/sdv_app_sensorsharing/sensorsharing/build/CMakeFiles/hw_grpc_proto.dir
