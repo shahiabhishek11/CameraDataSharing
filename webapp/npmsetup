@@ -1,0 +1,7 @@
+#!/bin/bash
+
+npm install express
+npm install lodash
+npm install @grpc/grpc-js
+npm install ejs
+npm install alert
