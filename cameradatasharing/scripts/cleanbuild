@@ -1,0 +1,7 @@
+#! /bin/bash
+cd ..
+rm -rf build
+mkdir build
+cd build
+cmake -DGRPC_DIR=$1 -DCMAKE_PREFIX_PATH=/opt/grpc/ ..
+make -j$(nproc)

@@ -1,0 +1,4 @@
+#! /bin/bash
+
+cd ../build
+./Server --target=$1
