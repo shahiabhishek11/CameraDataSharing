@@ -1,0 +1,63 @@
+package SensorSharing;
+
+syntax = "proto3";
+
+// ---- base types ---- //
+message Configurations {
+    repeated Configuration conf = 1;
+}
+message Request {
+    int32 clientId = 1;
+    int32 cameraId = 2;
+    Configurations configlist = 3;
+}
+message Camera {
+    int32 cameraId = 1;
+    string cameraName = 2;
+    int32 pixel = 3;
+    repeated string resolutions = 4;
+    int32 frameRate = 5;
+    string sensorSize = 6;
+    int32 fov = 7;
+};
+message RegisterInfo {
+    int32 clientId = 1;
+    repeated Camera cameraList = 2;
+}
+message Frame {
+    bytes rawBuffer = 1;
+    int32 height = 2;
+    int32 width = 3;
+    int32 channel = 4;
+}
+enum CaptureMode {
+    image = 0;
+    video = 1;
+}
+message Configuration {
+    int32 cameraId = 1;
+    string resoultion = 2;
+    bool cameraState = 3;
+    CaptureMode captureMode = 4;
+}
+message Response {
+    int32 response=1;
+    int32 datalen=2;
+}
+// -------------------- //
+
+// ---- services section ---- //
+service SensorSharing {
+    rpc register_(Request) returns (RegisterInfo) {}
+    rpc captureImage(Request) returns (Frame) {}
+    rpc getConfiguration(Request) returns (Configurations) {}
+    rpc setConfiguration(Request) returns (Response) {}
+    rpc toggleCameraState(Request) returns (Response){}
+    rpc startStream(Request) returns (stream Frame){}
+    rpc stopStream(Request) returns(Response){}
+    rpc deregister(RegisterInfo) returns(Response){}
+
+
+
+}
+// -------------------------- //
