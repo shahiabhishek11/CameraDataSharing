@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for sidebar and divs -->
+    <style>
+        body {
+            background-color: rgb(236, 228, 228);
+        }
+
+        /* Custom CSS for the sidebar */
+        #sidebar {
+            min-width: 260px;
+            max-width: 320px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color:  #3a37369a;
+            transition: left 0.3s ease-in-out;
+            z-index: 3; /* Set a higher z-index to overlay containers */
+        }
+
+        /* Custom CSS for buttons at the bottom of the sidebar */
+        .sidebar-bottom {
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            margin-left: -10px;
+            top: 100px;
+        }
+
+        /* Custom CSS for the logo */
+        .logo {
+            display: none; /* Initially hide the logo */
+            position: absolute;
+            top: 10px;
+            left: 100px; /* Adjust the left position as needed for the sidebar */
+            z-index: 4; /* Set a higher z-index for the logo */
+            position: fixed;
+        }
+
+        .logo-main img {
+            width: 80px; /* Adjust the width as needed */
+            height: 30px; /* Adjust the height as needed */
+            margin-left: 20px;
+            margin-top: 1px;
+        }
+
+        
+        .custom-container {
+            background-color: rgba(19, 18, 18, 0.034);
+            height: 40vh;
+            margin-top: 5px;
+            overflow: hidden; /* Hide any overflowing image */
+            position: relative; /* Add relative positioning to the container */
+            min-height: 80px;
+            width: 100%; /* Set the width of the container to 100% */
+            max-width: 100%;
+            background-color:  #020000b2;
+            
+        }
+
+        /* Style for the image inside the outer div */
+        .custom-container .carImage {
+            display: block; 
+            max-width: 100%; 
+            max-height: 100%; 
+            width: auto; 
+            height: 100%;
+            margin: 0 auto;
+            /* width: 100%; 
+            height: auto; 
+            object-fit: cover   ;
+            display: block;  */
+           
+        }
+        .cam-info{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+            /* padding: 10px; */
+        }
+        .top-left{
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 2;
+        }
+
+        .cam-buttons {
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            /* padding-top: 30px; */
+        }
+
+        .cam-buttons button {
+            margin: 0 auto; 
+            border: none;
+            background: none; /* Remove background color */
+            cursor: pointer;
+            display: block;
+        }
+        .cam-buttons .switch{
+            position: absolute;
+            /* right: 50px; */
+        }
+        button:disabled{
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .resolutions:disabled{
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .switch {
+        /* display: inline-block; */ 
+        width: 60px;
+        height: 34px;
+        position: relative;
+        z-index: 1;
+        right: 10px; /* Adjust the right position as needed */
+        bottom: 0; /* Adjust the bottom position as needed */
+        display: flex; /* Add display flex */
+        align-items: center; /* Vertically center the switch */
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+    .highlighted{
+        background-color: yellowgreen;
+    }
+
+        /* Media query for small screens */
+        @media (max-width: 768px) {
+            #sidebar {
+                left: -320px;
+            }
+
+            #sidebar.active {
+                left: 0;
+            }
+
+            .logo-main {
+                display: block; /* Display the logo on smaller screens */
+                text-align: right; /* Align the logo to the right */
+                padding: 1px;
+                margin-top: -25px;
+                margin-right: 10px;
+            }
+            .top-left{
+                width:30px;
+                height: 30px;
+            }
+            .switch{
+                width: 30px;
+                height: 17px;
+            }
+            .slider:before{
+                height: 13px;
+                width: 13px;
+                left: 2px;
+                bottom: 2px;
+            }
+            input:checked+.slider::before{
+                -webkit-transform: translate(13px);
+                -ms-transform: translate(13px);
+                transform: translate(13px);
+            }
+            .slider.round{
+                border-radius: 17px;
+            }
+            
+
+            
+        }
+
+        /* Custom styling for the div containers */
+        .custom-container {
+            top: 0;
+            /* padding: 20px; */
+        }
+
+        /* Custom CSS for aligning containers vertically */
+        @media (min-width: 768px) {
+            .custom-container {
+                margin-bottom: 20px;
+            }
+
+            .logo {
+                display: block; /* Display the logo on larger screens */
+            }
+        }
+
+        @media (min-width: 992px) {
+            .custom-container {
+                margin-bottom: 0;
+            }
+        }
+
+        /* Custom CSS for the hamburger button */
+        .custom-hamburger {
+            position: relative; /* Set the button's position to absolute */
+            top: 10px; /* Adjust the top position as needed (move it downoverlay) */
+            left: 10px; /* Adjust the right position as needed (move it right) */
+        }
+
+        h3 {
+            color: whitesmoke;
+        }
+
+        .nav-item {
+            margin-top: 30px;
+        }
+
+        /* Custom CSS for styled buttons */
+        .custom-button {    
+            border-radius: 20px; /* Rounded corners */
+            padding: 7px 14px; /* Padding for better appearance */
+            background-color: white; /* Initial background color */
+            color: black; /* Text color */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+            cursor: pointer; /* Change cursor on hover */
+            border: 0 0 1px black; /* Remove border */
+            outline: none; /* Remove outline on click */
+        }
+
+        /* .custom-button:hover {
+            background-color: rgb(230, 173, 173); 
+            color: black; 
+        }
+
+        .custom-button:active,
+        .custom-button:focus { 
+            background-color: lightsalmon; 
+            color: black; 
+            box-shadow: 0 0 1px black; 
+        } */
+
+        .play{
+            /* left: 0;  */
+            bottom: 0; /* Position the first button at the top */
+        }
+        .pause{
+            /* left: 0;  */
+             bottom: 0; /* Position the first button at the top bottom */
+        }
+        .dropbtn {
+            border-radius: 20px; /* Rounded corners */
+            padding: 7px 10px; /* Padding for better appearance */
+            background-color: white; /* Initial background color */
+            color: black; /* Text color */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+            cursor: pointer; /* Change cursor on hover */
+            /* border: 0 0 1px black; */  /* Remove border */
+            outline: none; /* Remove outline on click */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            border-radius: 20px;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            margin-top: 10px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            border-radius: 20px;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f4c6c6;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: rgb(230, 173, 173);
+        }
+       
+           /* CSS for highlighting the active button */
+.active-button {
+    background-color: rgb(230, 173, 173); /* Highlight color */
+    color: black;
+}
+
+     
+    </style>
+</head>
+<body>
+<!-- Logo (visible on the sidebar on larger screens) -->
+<div class="logo">
+    <img src="data:image/jpeg;base64,<%= base64Image %>" alt="Logo" style="width: 100px; height: 50px;">
+</div>
+
+<nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
+    <div class="position-sticky">
+        <button id="closeSidebar" class="btn btn-danger d-block d-md-none" style="float: right; margin-top: 10px;"
+                type="button">Close
+        </button>
+        <br>
+        <br>
+        <ul class="nav flex-column">
+            <% for (let i=0; i < confToRender.length; i++) { %>
+            <li class="nav-item">
+                <h3>
+                    <%= confToRender[i].cameraName %>
+                </h3>
+                <button class="custom-button  image" id='<%= i %>' value='1' type="button" onclick=selectModeImage(this.id)>Image</button>
+                <button class="custom-button video" id='<%= i %>' value='0' type="button" onclick=selectModeVideo(this.id)>Video</button>
+                <div class="dropdown">
+                    <!-- <button class="dropbtn">Resolution</button> -->
+                    <select class="form-control custom-width custom-button resolutions" id='<%= i %>'>
+                        <% for(let j=0; j < confToRender[i].resolutions.length; j++){ %>
+                        <option value="<%= confToRender[i].resolutions[j]%>"><%= confToRender[i].resolutions[j]%></option>
+                        <%}%> 
+                      </select>
+                </div>
+            </li>
+            <%};%>
+         
+            <!-- Add more menu items as needed -->
+        </ul>
+    </div>
+    <div class="sidebar-bottom">
+        <button id="saveButton" class="btn btn-primary custom-button" onclick="saveConfig()">Save</button>
+        <button class="btn btn-secondary custom-button" onclick="deregister()">Exit</button>
+     </div>
+</nav>
+
+
+<!-- Hamburger Menu Button -->
+<button id="sidebarCollapse" class="btn btn-primary d-md-none custom-hamburger" style="background-color: whitesmoke; color: black; border: none;" type="button">
+    <span class="navbar-toggler-icon">☰</span>
+</button>
+
+<!-- Logo (visible in the main body on smaller screens) -->
+<div class="logo-main d-md-none">
+    <img src="data:image/jpeg;base64,<%= base64Image %>" alt="Logo"> <!-- Replace with the path to your logo image -->
+</div>
+
+<!-- Div containers that align vertically with a maximum of 2 per row -->
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col-md-3 col-lg-2">
+            <!-- Empty column for spacing -->
+        </div>
+        <div class="col-md-9 col-lg-10">
+            <!-- Div content -->
+            
+            <div class="row">
+                <% for (let i=0; i < confToRender.length; i++) { %>
+                <div class="col-md-6">
+                    
+                    <div class="custom-container">
+             
+                        <div class="cam-info" style="display: flex; justify-content: space-between;">
+                            <div class="a" style="flex: 1; display: flex; align-items: center;">
+                                <div>
+                                    <!-- <img class="top-left" id="top-right<%=confToRender[i].cameraId%>" src="" alt="img" height="25px" width="25px" > -->
+                                </div>
+                            </div>
+                            <div class="b" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+                                <!-- <div> -->
+                                    <b class="camName" style="background-color: whitesmoke;">
+                                         <%= confToRender[i].cameraName %>
+                                  </b>
+                                <!-- </div> -->
+                            </div>
+                            <div class="c" style="flex: 1; display: flex; align-items: center; justify-content: flex-end;">
+                                <div class="top-right" id="top-left<%=confToRender[i].cameraId%>"></div>
+                            </div>
+                        </div>
+                        <img class="carImage" id="canvas<%=confToRender[i].cameraId%>" src="" alt=""> 
+                         <img class="top-left" id="top-right<%=confToRender[i].cameraId%>" src="" alt="img" height="40px" width="40px" >                      
+                        <div class="cam-buttons">
+                            <div class="imageBtns">
+                            <button class="refresh" id="<%=confToRender[i].cameraId%>" title="refresh" onclick="loadImage(this.id)" style="border: none;"><img src="data:image/jpeg;base64,<%=base64Capture%>" height="55px" width="55px"></button>
+                        </div>
+                        <div class="vidBtns">
+                            <button class="play" id="<%=confToRender[i].cameraId%>" title="play" onclick="startStream(this.id)" style="border: none;"><img src="data:image/jpeg;base64,<%=base64Play%>" height="55px" width="55px"></button>
+                            <button class="pause" id="<%=confToRender[i].cameraId%>" title="pause" onclick="stopStream(this.id)" style="border: none;"><img src="data:image/jpeg;base64,<%=base64Pause%>" height="55px" width="55px"></button>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" class="toggle" id="<%=confToRender[i].cameraId%>" 
+                            value="<%=configToRender[i].cameraState%>" onchange = "toggleCamera(this.id)">
+                            <span class="slider round"></span>
+                        </label>
+                        </div>
+                    </div>
+                    
+                </div>
+                <%};%>
+            </div>
+            
+        
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JavaScript and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Custom jQuery code for toggling the sidebar -->
+<script>
+
+    // JavaScript to toggle active class on image and video buttons
+function toggleActiveButton(buttonId, buttonType) {
+    
+    var imageButtons = document.querySelectorAll(".custom-button.image");
+    var videoButtons = document.querySelectorAll(".custom-button.video");
+
+    if(buttonType === "image"){
+        imageButtons.forEach(function(button) {
+            console.log("btnid" + buttonId);
+            
+            if (button.id === buttonId) {
+                button.classList.add("active-button"); // Add active class to clicked button
+            } 
+        });
+
+        videoButtons.forEach(function(button) {
+            console.log("btnid" + buttonId);
+            
+            if (button.id === buttonId) {
+                button.classList.remove("active-button"); // Add active class to clicked button
+            } 
+        });
+
+    } else if(buttonType === "video"){
+        imageButtons.forEach(function(button) {
+            console.log("btnid" + buttonId);
+            
+            if (button.id === buttonId) {
+                button.classList.remove("active-button"); // Add active class to clicked button
+            } 
+        });
+
+        videoButtons.forEach(function(button) {
+            console.log("btnid" + buttonId);
+            
+            if (button.id === buttonId) {
+                button.classList.add("active-button"); // Add active class to clicked button
+            } 
+        });
+
+
+    }
+}
+
+
+
+
+// function toggleActiveButton(buttonId, buttonType) {
+//     var buttons;
+//     if (buttonType === 'image') {
+//         buttons = document.querySelectorAll(".custom-button.image");
+//     } else if (buttonType === 'video') {
+//         buttons = document.querySelectorAll(".custom-button.video");
+//     }
+    
+//     buttons.forEach(function(button) {
+//         console.log("btnid" + buttonId);
+        
+//         if (button.id === buttonId) {
+//             button.classList.add("active-button"); // Add active class to clicked button
+//         } else {
+//             button.classList.remove("active-button"); // Remove active class from other buttons in the same group
+//         }
+//     });
+// }
+// Add event listeners to your image and video buttons
+document.addEventListener("DOMContentLoaded", function() {
+    var imageButtons = document.querySelectorAll(".custom-button.image");
+    var videoButtons = document.querySelectorAll(".custom-button.video");
+    
+    imageButtons.forEach(function(button) {
+        button.addEventListener("click", function(event) {
+            toggleActiveButton(event.target.id, 'image');
+        });
+    });
+    
+    videoButtons.forEach(function(button) {
+        button.addEventListener("click", function(event) {
+            toggleActiveButton(event.target.id, 'video');
+        });
+    });
+});
+
+
+
+
+    $(document).ready(function () {
+        $("#sidebarCollapse").on("click", function () {
+            $("#sidebar").toggleClass("active");
+        });
+    });
+    $(document).ready(function () {
+        // Click event for the "Close" button
+        $("#closeSidebar").on("click", function () {
+            $("#sidebar").toggleClass("active"); // Toggle the 'active' class on the sidebar
+        });
+
+           //---here is the kchange code
+    $("#saveButton").on("click", function () {
+        $("#sidebar").toggleClass("active"); // Toggle the 'active' class on the sidebar
+    }); 
+    });
+
+
+    cameraIds = [];
+        var numOfConfig =  <%= confToRender.length%> ;
+        var appIp = "<%= appIp%>";
+        console.log("IP address : "+appIp);
+        var isStreaming = false;
+        <% for (var i = 0; i < confToRender.length; i++) { %>
+            var temp = <%= confToRender[i].cameraId %>;
+          cameraIds.push(temp[0].id);
+          console.log("---- while initial pushback ----");
+          console.log(temp[0].id);
+          console.log("---- ---------------------- ----");
+        <%}%>;
+        var configArr = new Array(numOfConfig);
+
+        var image_number = 0;
+        var socket = new WebSocket('ws://'+appIp+':3001');
+       
+
+        //TODO: modify the canvas id
+        function loadImage(i) {
+          console.log("From load Image");
+          // document.getElementById('canvas' + i).src = ('/image?cam=' + i) + image_number++;
+           if(document.getElementById("top-left"+i).style.display !== "block"){
+            document.getElementById("top-left"+i).style.display = "block";
+          }
+          var currentdate = new Date();
+          var timenow = + currentdate.getHours() + " : "
+            + currentdate.getMinutes() + " : "
+            + currentdate.getSeconds();
+           document.getElementById("top-left" + i).innerHTML = timenow;
+          fetch(("http://"+appIp+":3000/image?cam=" + i),
+            { method: "GET", mode: "no-cors", cache: "no-cache", credentials: "same-origin", headers: { "Content-Type": "application/json", }, redirect: "follow", referrerPolicy: "no-referrer", });
+
+        }
+        function startStream(i) {
+            isStreaming = true;
+            document.getElementsByClassName('play')[i].style.display = "none";
+            document.getElementsByClassName('pause')[i].style.display = "block";
+          if(document.getElementById("top-left"+i).style.display !== "none"){
+            console.log("Inside start stream if statement");
+            document.getElementById("top-left"+i).style.display = "none";
+          }
+                  
+          fetch(("http://"+appIp+":3000/startStream?cam=" + i),
+            { method: "GET", mode: "no-cors", cache: "no-cache", credentials: "same-origin", headers: { "Content-Type": "application/json", }, redirect: "follow", referrerPolicy: "no-referrer", });
+        }
+
+        function stopStream(i) {
+            isStreaming = false;
+            document.getElementsByClassName('play')[i].style.display = "block";
+            document.getElementsByClassName('pause')[i].style.display = "none"; 
+          fetch(("http://"+appIp+":3000/stopStream?cam=" + i),
+            { method: "GET", mode: "no-cors", cache: "no-cache", credentials: "same-origin", headers: { "Content-Type": "application/json", }, redirect: "follow", referrerPolicy: "no-referrer", });
+
+        }
+
+        function selectModeImage(i) {
+          var image = document.getElementsByClassName('image')[i];
+          image.value = '1';
+         
+          var video = document.getElementsByClassName('video')[i];
+          video.value = '0';
+          image.classList.add('highlighted');
+          video.classList.remove('highlighted');
+        }
+        //TODO: combine the two buttons
+        function selectModeVideo(i) {
+          var image = document.getElementsByClassName('image')[i];
+          image.value = '0';
+         
+          var video = document.getElementsByClassName('video')[i];
+          video.value = '1';
+          video.classList.add('highlighted');
+          image.classList.remove('highlighted');
+        }
+        function saveConfig() {
+          var button = document.getElementsByClassName("image");
+          var resolutions = document.getElementsByClassName("resolutions");
+          var toggels = document.getElementsByClassName("toggle");
+          console.log(configArr);
+          for (var i = 0; i < button.length;i++) {
+                configArr[i].resolution = resolutions[i].value;
+                if (button[i].value == '1') {
+                //show image buttons
+                showImgButtons(i);
+                configArr[i].captureMode = "image";
+                }
+                else {
+                //show vid buttons
+                showVidButtons(i);
+                configArr[i].captureMode = "video";
+                }
+                configArr[i].cameraState = toggels[i].value;
+                imageButton = document.getElementsByClassName('image')[i];
+                videoButton = document.getElementsByClassName('video')[i];
+                console.log(imageButton);
+                imageButton.classList.remove('highlighted');
+                videoButton.classList.remove('highlighted');
+
+          }
+          console.log("// ---- configArr ---- //");
+          console.log(configArr);
+          console.log("// ---- --------- ---- //");
+        //   const screenWidth = window.screen.width;
+        //   if(screenWidth <= 768){
+        //     console.log("Inside screenwidth");
+        //     $("#closeSidebar").on("click", function () {
+        //     $("#sidebar").toggleClass("active"); // Toggle the 'active' class on the sidebar
+        //  });
+        //   }
+          fetch('/setconfig', {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(configArr)
+          }).then(data => {
+            console.log("in data");
+            //console.log(data);
+            configArr.forEach(element => {
+                console.log('Inside it ::: '+element.cameraState + typeof(element.cameraState));
+              if (element.cameraState === "true") {
+
+                if (element.captureMode === "image" ) {
+                  loadImage(element.cameraId);
+                } else if (element.captureMode === "video") {
+                    if(isStreaming === true){
+                        stopStream(element.cameraId);   
+                    }
+                  startStream(element.cameraId);
+                }
+              }
+            });
+          });
+         
+        }
+
+        function showImgButtons(i) {
+          var refresh = document.getElementsByClassName("imageBtns");
+          var playPause = document.getElementsByClassName("vidBtns");
+    
+          refresh[i].style.display = "block";
+          playPause[i].style.display = "none";
+          if(document.getElementsByClassName("toggle")[i].checked){
+            document.getElementsByClassName('refresh')[i].disabled = false; 
+          }else{
+            document.getElementsByClassName('refresh')[i].disabled = true;
+          }
+          console.log("Top right Image "+i+" ::: "+document.getElementById("top-rightusb_video"+i));
+          document.getElementById("top-rightusb_video"+i).src = "data:image/jpeg;base64,<%= base64Camera %>" ;
+        }
+ 
+        function showVidButtons(i) {
+          var refresh = document.getElementsByClassName("imageBtns");
+          var playPause = document.getElementsByClassName("vidBtns");
+          refresh[i].style.display = "none";
+          playPause[i].style.display = "block";
+          
+        //   playPause[i + 1].style.display = "block";
+          if(document.getElementsByClassName("toggle")[i].checked){
+             document.getElementsByClassName('play')[i].disabled = false;
+             document.getElementsByClassName('pause')[i].disabled = false;
+          }else{
+            document.getElementsByClassName('play')[i].disabled = true;
+             document.getElementsByClassName('pause')[i].disabled = true;
+          }
+          console.log("Top right  Video "+i+ " ::: "+document.getElementById("top-rightusb_video"+i));
+          document.getElementById("top-rightusb_video"+i).src = "data:image/jpeg;base64,<%= base64Video %>" ;
+        }
+
+        function onLoad() {
+          var j = 0;
+          var resolutions = document.getElementsByClassName("resolutions");
+          var toggles = document.getElementsByClassName("toggle");
+
+          <% for (let i = 0; i < configToRender.length; i++) { %>
+              var mode = "<%=configToRender[i].captureMode%>";
+              if (toggles[j].value === "true") {
+                  toggles[j].checked = true;
+              }
+              else {
+                toggles[j].checked = false;
+            }
+            if (mode == 'image') {
+                console.log("Inside image");
+                 showImgButtons(j);
+                selectModeImage(j);
+            }
+            else {
+                console.log("Inside video");
+                 showVidButtons(j);
+                selectModeVideo(j);
+            }
+            var currentResolution = "<%=configToRender[i].resolution%>";
+            resolutions[j].value = currentResolution;
+            console.log(toggles[j].value);
+            j++;
+            <% } %>
+
+          for (let i = 0; i < configArr.length; i++) {
+
+            let config = {};
+            config['cameraId'] = cameraIds[i];
+            config['resolution'] = "";
+            config['cameraState'] = "true";
+            config['captureMode'] = "";
+            configArr[i] = config;
+
+          }
+        }
+
+        function deregister() {
+          fetch('/deregister').then(() => {
+            window.close();
+          });
+          
+       
+        }
+
+        //While turning off i need only cameraID but what about when turning on? 
+        //Which resolution should it display?
+        //What selection to be shown?(When toggled off)
+        //Camera block on side nav be differently coloured (grey) when toggled off?
+        function toggleCamera(i) {
+           console.log("From toggle function");
+          var toggle = document.getElementsByClassName("toggle")[i];
+          //true means camera in on
+         
+          var camid = String(i);
+          console.log(toggle);
+          camid = camid.slice(9);
+          if (toggle.checked) {
+             document.getElementsByClassName('refresh')[i].disabled = false; 
+             document.getElementsByClassName('play')[i].disabled = false;
+             document.getElementsByClassName('pause')[i].disabled = false;
+             document.getElementsByClassName('image')[camid].disabled = false;
+             document.getElementsByClassName('video')[camid].disabled = false;
+             document.getElementsByClassName('resolutions')[camid].disabled = false;
+             toggle.value = true;
+             console.log(toggle.checked);
+          }
+          else {
+            document.getElementsByClassName('refresh')[i].disabled = true; 
+            document.getElementsByClassName('play')[i].disabled = true; 
+            document.getElementsByClassName('pause')[i].disabled = true; 
+            document.getElementsByClassName('image')[camid].disabled = true;
+            document.getElementsByClassName('video')[camid].disabled = true;
+            document.getElementsByClassName('resolutions')[camid].disabled = true;
+            toggle.value = false;
+            console.log(toggle.checked);
+          }
+          //toggle.value = !toggle.value;
+          console.log("camid ==> " + i);
+          fetch('/toggleCamera?camId=' + i);
+        }
+        onLoad();
+        socket.onopen = function () {
+          socket.send("web socket opened...");
+        }
+        socket.onmessage = function (mssg) {
+          mssg.data.slice(-10).text().then((argument) => {
+            console.log(argument);
+            var videoframe = document.getElementById('canvas' + argument);
+            videoframe.src = URL.createObjectURL(mssg.data.slice(0, -10));
+            console.log("From on message");
+          });
+        }
+
+</script>
+</body>
+</html>
